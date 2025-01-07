@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import AddTodoModal from './AddTodoModal';
-import TodoCard from './TodoCard';
-import TodoFilter from './TodoFilter';
+import { useGetTodosQuery } from "@/Redux/api/api";
+import AddTodoModal from "./AddTodoModal";
+import TodoCard from "./TodoCard";
+import TodoFilter from "./TodoFilter";
 
 const TodoContainer = () => {
-  const [todos, setTodos] = useState({ data: [] });
+  const { data: todos } = useGetTodosQuery(undefined);
 
   return (
     <div>
