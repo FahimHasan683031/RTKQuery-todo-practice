@@ -1,3 +1,4 @@
+import { useDeleteTodoMutation } from "@/Redux/api/api";
 import { Button } from "../ui/button";
 
 type TTodoCardProps = {
@@ -5,12 +6,15 @@ type TTodoCardProps = {
   title: string;
   description: string;
   isCompleted?: boolean;
+  _id: string;
 };
 
-const TodoCard = ({ title, description, id, isCompleted }: TTodoCardProps) => {
+const TodoCard = ({ title, description, isCompleted, _id }: TTodoCardProps) => {
   const toggleState = () => {
     console.log("Toggle");
   };
+
+  const [deleteTodo] = useDeleteTodoMutation();
 
   return (
     <div className="bg-white rounded-md flex justify-between items-center p-3 border">
@@ -31,7 +35,7 @@ const TodoCard = ({ title, description, id, isCompleted }: TTodoCardProps) => {
       </div>
       <p>{description}</p>
       <div className="space-x-5">
-        <Button className="bg-red-500">
+        <Button onClick={() => deleteTodo(_id)} className="bg-red-500">
           <svg
             className="size-5"
             fill="none"

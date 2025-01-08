@@ -1,5 +1,5 @@
-import { FormEvent, useState } from 'react';
-import { Button } from '../ui/button';
+import { FormEvent, useState } from "react";
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,24 +8,25 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
+} from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { useAddTodoMutation } from "@/Redux/api/api";
 
 const AddTodoModal = () => {
-  const [task, setTask] = useState('');
-  const [description, setDescription] = useState('');
+  const [task, setTask] = useState("");
+  const [description, setDescription] = useState("");
+  const [addTodo] = useAddTodoMutation();
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const randomString = Math.random().toString(36).substring(2, 7);
-
     const taskDetails = {
-      id: randomString,
       title: task,
       description: description,
+      isCompleted: false,
     };
+    addTodo(taskDetails);
   };
 
   return (
